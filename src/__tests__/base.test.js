@@ -1,19 +1,25 @@
-import { Team } from '../team';
-import { ErrorRepository } from '../ErrorRepository';
+import { Team } from "../team";
+import { ErrorRepository } from "../ErrorRepository";
 
 test("Team",
     () => {
-        let asd = [1,2,3,1,2,4,8];
-
-        let expRes = [1,2,3,4,8];
+        let asd = [1,2,3,4,8];
 
         let team = new Team();
 
         team.addAll(asd);
 
-        team.add(1);
+        expect(team.toArray()).toStrictEqual(asd);
 
-        expect(team.toArray()).toStrictEqual(expRes);
+        let errorMessage = "";
+        try {
+            team.add(1);
+        } catch (e) {
+            errorMessage = e.message;
+        }
+
+        expect(errorMessage).toBe("Персонаж уже существует в команде");
+
     }
 )
 
