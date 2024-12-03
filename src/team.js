@@ -6,12 +6,15 @@ export class Team {
 
     add(member)
     {
+        if (this.members.has(member)) {
+            throw new Error('Персонаж уже существует в команде');
+        }
         this.members.add(member);
     }
 
     addAll(members)
     {
-        members.forEach(i => this.members.add(i));
+        members.forEach(i => this.add(i));
     }
 
     toArray()
